@@ -1,34 +1,56 @@
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 400px) {
+  #restaurants-list {
+      padding: 30px 30px 60px;
+  }
 
-    #restaurants-list {
-        padding: 30px 15px 60px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
+  .restaurant-list__wrapper {
+    padding: 20px;
+    min-height: 380px;
+  }
 
-    #restaurants-list li {
-        margin: 15px;
-        min-height: 380px;
-        padding: 0 30px 25px;
-        text-align: left;
-        width: 270px;
-      }
+  #restaurants-list li h1, #restaurants-list p {
+    padding-left: 0;
+  }
 
-      #restaurants-list .restaurant-img {
-        margin: 30px 0 0;
-      }
+  #restaurants-list li a {
+    margin: 15px 0 15px;  }
+}
 
-      #restaurants-list li h1 {
-        padding-left: 0;
-      }
+@media screen and (min-width: 600px) {
+  nav h1 a {
+    color: #fff;
+    font-size: 18pt;
+    font-weight: 200;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+  }
 
-      #restaurants-list p {
-        margin: 0;
-        font-size: 11pt;
-        padding-left: 0;
-      }
+  .filter-options {
+    flex-direction: row;
+  }
 
-      #restaurants-list li a {
-        margin: 15px 0 0;
-      }
+  .filter-options h2 {
+    margin: 0 20px;
+  }
+
+  .filter-options select {
+    width: 200px;
+  }
+
+  .restaurant-list__wrapper {
+    margin: 0 15px 30px;
+  }
+
+  #restaurants-list li {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1000px){
+  #restaurants-list li {
+    width: 33%;
+  }
+  .restaurant-list__wrapper {
+    padding: 20px 20px 0;
+  }
 }
