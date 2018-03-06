@@ -85,7 +85,7 @@ window.initMap = () => {
 }
 
 setMapTitle = () => {
-  let iFrame = document.querySelector('#map iframe');
+  let iFrame = document.querySelector('#map').querySelector('iframe');
   iFrame.setAttribute('title', 'Google maps with restaurants locations');
 };
 

@@ -16,9 +16,16 @@ window.initMap = () => {
       });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
-    }
+      setMapTitle = () => {
+        let iFrame = document.querySelector('#map iframe');
+        iFrame.setAttribute('title', 'Google maps with restaurants locations');
+      };
+    };
+    
   });
 }
+
+
 
 /**
  * Get current restaurant from page URL.
@@ -58,6 +65,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `Image of the ${restaurant.name} restaurant`;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
