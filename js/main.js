@@ -81,7 +81,13 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
+  self.map.addListener('tilesloaded', setMapTitle);
 }
+
+setMapTitle = () => {
+  let iFrame = document.querySelector('#map iframe');
+  iFrame.setAttribute('title', 'Google maps with restaurants locations');
+};
 
 /**
  * Update page and map for current restaurants.
