@@ -14,18 +14,18 @@ window.initMap = () => {
         center: restaurant.latlng,
         scrollwheel: false
       });
-      fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+
       setMapTitle = () => {
         let iFrame = document.querySelector('#map iframe');
-        iFrame.setAttribute('title', 'Google maps with restaurants locations');
+        iFrame.setAttribute('title', `Google map with ${restaurant.name} locations`);
       };
+      
+      fillBreadcrumb();
+      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+      self.map.addListener('tilesloaded', setMapTitle);  
     };
-    
   });
 }
-
-
 
 /**
  * Get current restaurant from page URL.

@@ -71,6 +71,10 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize Google map, called from HTML.
  */
 window.initMap = () => {
+  setMapTitle = () => {
+    let iFrame = document.querySelector('#map').querySelector('iframe');
+    iFrame.setAttribute('title', 'Google maps with restaurants locations');
+  };
   let loc = {
     lat: 40.722216,
     lng: -73.987501
@@ -81,13 +85,9 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
-  self.map.addListener('tilesloaded', setMapTitle);
+  self.map.addListener('tilesloaded', setMapTitle);  
 }
 
-setMapTitle = () => {
-  let iFrame = document.querySelector('#map').querySelector('iframe');
-  iFrame.setAttribute('title', 'Google maps with restaurants locations');
-};
 
 /**
  * Update page and map for current restaurants.
