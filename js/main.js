@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator){
 };
 
 /*  
-Main js file
+Main js content
 */
 
 let restaurants,
@@ -94,10 +94,7 @@ window.initMap = () => {
     let iFrame = document.querySelector('#map').querySelector('iframe');
     iFrame.setAttribute('title', 'Google maps with restaurants locations');
   };
-  // setMapLanguage = () => {
-  //   let mapLanguage = document.querySelector('#map iframe #document html');
-  //   mapLanguage.setAttribute('lang', 'en');
-  // };
+
   let loc = {
     lat: 40.722216,
     lng: -73.987501
@@ -109,7 +106,7 @@ window.initMap = () => {
   });
   updateRestaurants();
   self.map.addListener('tilesloaded', setMapTitle); 
-  // self.map.addListener('tilesloaded', setMapLanguage); 
+
 }
 
 
