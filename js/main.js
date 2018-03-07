@@ -1,3 +1,22 @@
+/*
+Register the service worker
+*/
+if ('serviceWorker' in navigator){
+  navigator.serviceWorker
+  .register('/sw.js')
+  .then(function(){
+    console.log("SW registration completed");
+  }).catch(function(err){
+    console.log("SW registration failed", err);
+  });
+} else {
+  console.log("SW is not supported in this browser");
+};
+
+/*  
+Main js file
+*/
+
 let restaurants,
   neighborhoods,
   cuisines
@@ -75,6 +94,10 @@ window.initMap = () => {
     let iFrame = document.querySelector('#map').querySelector('iframe');
     iFrame.setAttribute('title', 'Google maps with restaurants locations');
   };
+  // setMapLanguage = () => {
+  //   let mapLanguage = document.querySelector('#map iframe #document html');
+  //   mapLanguage.setAttribute('lang', 'en');
+  // };
   let loc = {
     lat: 40.722216,
     lng: -73.987501
@@ -85,7 +108,8 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
-  self.map.addListener('tilesloaded', setMapTitle);  
+  self.map.addListener('tilesloaded', setMapTitle); 
+  // self.map.addListener('tilesloaded', setMapLanguage); 
 }
 
 
