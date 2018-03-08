@@ -20,21 +20,38 @@ const cacheFiles = [
 	'/img/10.jpg'
 ]
 
-
-// Install event
+// *Install event 
 self.addEventListener('install', function(event){
+	console.log("SW installed");
 	event.waitUntil(
-		caches.open(cacheName).then(function(cache){
+		caches.open(cacheName)
+		.then(function(cache){
+			console.log("SW caching cachefiles");
 			return cache.addAll(cacheFiles);
 		})
 	)
 });
 
+// Activate event
+self.addEventListener('activate', function(event){
+	console.log("SW activated");
+	event.waitUntil(
+		caches.keys().then(function(cacheNames){
+			return Promise.all(cacheNames.map(function(thisCacheName){
+				if(thisCacheName !== cacheName) {
+					console.log("SW Removing cached files from", thisCacheName);
+					return caches.delete(thisCacheName);
+				}
+			}))
+		})
+	)
+});
+
 // Fetch event
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request).then(function(response) {
-    return response || fetch(event.request);
-    })
-  );
+self.addEventListener('fetch', function(event){
+	event.respondWith(
+		caches.match(event.request).then(function(response){
+			return response || fetch(event.request);
+		})
+	);
 });
