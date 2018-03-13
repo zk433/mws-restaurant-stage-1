@@ -270,6 +270,7 @@ nav h1 a {
   font-size: 12pt;
   margin: 10px 0px;
   padding: 0 20px;
+  font-weight: 300;
 }
 #restaurant-cuisine {
   background-color: #333;
