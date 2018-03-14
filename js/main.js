@@ -160,7 +160,7 @@ createRestaurantHTML = (restaurant) => {
   image.alt = `Image of the ${restaurant.name} restaurant`;
   wrapper.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   wrapper.append(name);
 
