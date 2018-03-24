@@ -20,6 +20,7 @@ class DBHelper {
     fetch(DBHelper.DATABASE_URL).then(response => {
         return response.json();
     }).then(data => {
+      const restaurants = data;
       callback(null, restaurants);
     }).catch(err => {
       const error = (`Request failed. Returned status of ${err.status}`);
