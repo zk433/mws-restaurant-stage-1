@@ -5,6 +5,8 @@ const cacheFiles = [
 	'/js/dbhelper.js',
 	'/js/main.js',
 	'/js/restaurant_info.js',
+	'/js/indexedDB.js',
+	'/vendor/idb.js',
 	'/css/media-queries.css',
 	'/css/styles.css',
 	'/data/restaurants.json',
@@ -17,7 +19,8 @@ const cacheFiles = [
 	'/img/7.jpg',
 	'/img/8.jpg',
 	'/img/9.jpg',
-	'/img/10.jpg'
+	'/img/10.jpg',
+	'https://fonts.googleapis.com/css?family=Open+Sans:400,700'
 ]
 
 // *Install event 

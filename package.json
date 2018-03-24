@@ -1,0 +1,23 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Udacity Mobile Web Specialist nanodegree project",
+  "main": "index.js",
+  "dependencies": {
+    "idb": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zk433/mws-restaurant-stage-1.git"
+  },
+  "author": "Zuzana K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zk433/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/zk433/mws-restaurant-stage-1#readme"
+}
