@@ -1,6 +1,3 @@
-/**
- * Common database helper functions.
- */
 class DBHelper {
 
   /**
@@ -21,6 +18,7 @@ class DBHelper {
         return response.json();
     }).then(data => {
       const restaurants = data;
+      openDB(restaurants);
       callback(null, restaurants);
     }).catch(err => {
       const error = (`Request failed. Returned status of ${err.status}`);
