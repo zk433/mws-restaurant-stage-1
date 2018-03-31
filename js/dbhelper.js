@@ -16,17 +16,28 @@ class DBHelper {
   static fetchRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL).then(response => {
         return response.json();
-    }).then(data => {
-      const restaurants = data;
-      openDB(restaurants);
+    }).then(restaurants => {
+      this.saveRestaurants(restaurants);
       callback(null, restaurants);
     }).catch(err => {
-      const error = (`Request failed. Returned status of ${err.status}`);
-      callback(error, null);
+      console.log('Failed to connect to server,', err, ', data will be served from DB');
+        return this.getRestaurants()
+        .then(response => {
+          return callback(null, response);
+        }).catch(err => {
+          const error = (`Request failed. Returned status of ${err.status}`);
+          callback(error, null);
+        })
     });
   }
 
+  static saveRestaurants(restaurants) {
+    localforage.setItem('restaurants', restaurants)
+  }
 
+  static getRestaurants() {
+    return localforage.getItem('restaurants')
+  }
 
   /**
    * Fetch a restaurant by its ID.
@@ -46,8 +57,6 @@ class DBHelper {
       }
     });
   }
-
-  
 
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
