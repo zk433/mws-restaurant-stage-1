@@ -9,6 +9,7 @@ const cacheFiles = [
 	'/vendor/localforage.js',
 	'/css/media-queries.css',
 	'/css/styles.css',
+	'/manifest.json',
 	'/img/1.jpg',
 	'/img/2.jpg',
 	'/img/3.jpg',
@@ -19,6 +20,11 @@ const cacheFiles = [
 	'/img/8.jpg',
 	'/img/9.jpg',
 	'/img/10.jpg',
+	'/img/logo-128.png',
+	'/img/logo-144.png',
+	'/img/logo-152.png',
+	'/img/logo-192.png',
+	'/img/logo-512.png',
 	'https://fonts.googleapis.com/css?family=Open+Sans:400,700'
 ]
 
