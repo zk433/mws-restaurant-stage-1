@@ -337,3 +337,87 @@ nav h1 a {
 #restaurant-hours td {
   color: #666;
 }
+
+/* Media Queries */
+@media screen and (min-width: 400px) {
+  #restaurants-list, #restaurant-container, #reviews-container {
+      padding: 30px 30px 60px;
+  }
+
+  .restaurant-list__wrapper {
+    padding: 20px;
+    min-height: 380px;
+  }
+
+  .restaurant-list__wrapper h2 {
+    padding-left: 0;
+  }
+
+  #restaurants-list li h1, #restaurants-list p {
+    padding-left: 0;
+  }
+
+  #restaurant-name {
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  #reviews-container {
+    padding: 20px 0;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  nav h1 a {
+    color: #fff;
+    font-size: 18pt;
+    font-weight: 200;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+  }
+
+  .filter-options {
+    flex-direction: row;
+  }
+
+  .filter-options h2 {
+    margin: 0 20px;
+  }
+
+  .filter-options select {
+    width: 200px;
+  }
+
+  .restaurant-list__wrapper {
+    margin: 0 15px 30px;
+  }
+
+  #restaurants-list li {
+    width: 50%;
+    padding-bottom: 30px;
+  }
+
+  #restaurant-container, #reviews-container {
+    width: 49%;
+    padding: 0;
+  }
+
+  #restaurant-container {
+    margin-right:10px;
+  }
+
+  #reviews-container h2 {
+    padding-top: 27px;
+  }
+
+  #restaurant-name {
+    margin: 30px 0;
+  }
+}
+
+@media screen and (min-width: 1000px){
+  #restaurants-list li {
+    width: 33%;
+    padding-bottom: 30px; 
+  }
+}

@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/media-queries.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link async rel="stylesheet" href="css/normalize.min.css">
+  <link async rel="stylesheet" href="dist/css/styles.min.css">
+  <link async defer href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <title>Restaurant Reviews</title>
   <link rel="shortcut icon" href="/favicon.png" type="image/png" />
   <link rel="manifest" href="/manifest.json">
@@ -61,13 +60,18 @@
     } else {
       console.log("SW is not supported in this browser");
     };
+    
   </script>
+
+
 
   <script src="dist/idb.js"></script>
   <script src="dist/localforage.js"></script>
   <script type="application/javascript" charset="utf-8" src="dist/dbhelper.js"></script>
-  <!-- <script type="application/javascript" charset="utf-8" src="js/index.js"></script> -->
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+
+  <script async src="js/lazyload.min.js"></script>
+
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBy2n0JtTy1xKkv1iSmT8HVXjvjzQ0rw&libraries=places&callback=initMap"></script>
 
