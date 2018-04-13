@@ -1,15 +1,20 @@
-const cacheName = "restaurant-cache-v1";
+const cacheName = "restaurant-cache-v2";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
 	'/js/dbhelper.js',
 	'/js/main.js',
 	'/js/restaurant_info.js',
-	'/vendor/idb.js',
-	'/vendor/localforage.js',
+	'/js/idb.js',
+	'/js/localforage.js',
+	// '/js/index.js',
+	'/dist/idb.js',
+	'/dist/localforage.js',
+	'/dist/dbhelper.js',
 	'/css/media-queries.css',
 	'/css/styles.css',
 	'/manifest.json',
+	'/favicon.png',
 	'/img/1.jpg',
 	'/img/2.jpg',
 	'/img/3.jpg',

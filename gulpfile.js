@@ -1,14 +1,34 @@
 var gulp        = require('gulp'),
-    concat      = require('gulp-concat'),
-    cssnano     = require('gulp-cssnano'),
-    htmlmin     = require('gulp-htmlmin'),
-    imagemin    = require('gulp-imagemin'),
+    sourcemaps  = require('gulp-sourcemaps'),
     uglify      = require('gulp-uglify'),
-    cache       = require('gulp-cache'),
-    useref      = require('gulp-useref'),
-    rename      = require('gulp-rename');
+    concat      = require('gulp-concat'),
+    rename      = require('gulp-rename'),
+    del         = require('del'),
+    babel       = require('gulp-babel'),
+    copy        = require('gulp-copy');
 
-gulp.task('hello', function() {
-    console.log('Hi!');
+gulp.task('del', function(){
+    return del.sync('dist');
+})
+
+gulp.task('js',  function(){
+    return gulp.src(['js/localforage.js', 'js/idb.js', 'js/dbhelper.js'])
+    .pipe(sourcemaps.init())
+    .pipe( babel( {
+        presets: [ 'env' ],
+    }))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist'))
 });
 
+// gulp.task('js',  function(){
+//     return gulp.src('js/*.js')
+//     .pipe(sourcemaps.init())
+//     .pipe( babel( {
+//         presets: [ 'env' ],
+//     }))
+//     .pipe(uglify())
+//     .pipe(sourcemaps.write('./'))
+//     .pipe(gulp.dest('dist'))
+// });

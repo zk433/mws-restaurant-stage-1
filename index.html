@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/media-queries.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <title>Restaurant Reviews</title>
+  <link rel="shortcut icon" href="/favicon.png" type="image/png" />
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2196F3">
   <meta name="Description" content="Restaurant Review App">
@@ -48,13 +49,26 @@
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
 
-<!--build:js js/main.min.js -->
-  <script src="vendor/idb.js"></script>
-  <script src="vendor/localforage.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/index.js"></script>
+  <script>
+    if ('serviceWorker' in navigator){
+    navigator.serviceWorker
+    .register('sw.js')
+    .then(function(registration){
+      console.log("SW registration completed");
+    }).catch(function(err){
+      console.log("SW registration failed", err);
+    });
+    } else {
+      console.log("SW is not supported in this browser");
+    };
+  </script>
+
+  <script src="dist/idb.js"></script>
+  <script src="dist/localforage.js"></script>
+  <script type="application/javascript" charset="utf-8" src="dist/dbhelper.js"></script>
+  <!-- <script type="application/javascript" charset="utf-8" src="js/index.js"></script> -->
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
-<!-- endbuild -->
+
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBy2n0JtTy1xKkv1iSmT8HVXjvjzQ0rw&libraries=places&callback=initMap"></script>
 
 
