@@ -1,4 +1,4 @@
-const cacheName = "restaurant-cache-v1";
+const cacheName = "restaurant-cache-v2";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
@@ -60,8 +60,17 @@ self.addEventListener('activate', function(event){
 // Fetch event
 self.addEventListener('fetch', function(event){
 
-	var url = new URL(event.request.url)
+	url = new URL(event.request.url)
+
 	if (url.origin !== self.origin) return;
+
+	if (url.pathname === '/') {
+		event.respondWith(
+			caches.match('/')
+				.then(response => response || fetch(url))
+		);
+	}
+	
 	event.respondWith(
 		caches.match(url.pathname).then(function(response){
 			return response || fetch(url);
