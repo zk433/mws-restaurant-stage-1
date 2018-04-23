@@ -1,9 +1,10 @@
-const cacheName = "restaurant-cache-v3";
+const cacheName = "restaurant-cache-v1";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
 	'/js/main.js',
 	'/js/restaurant_info.js',
+	'/js/lazyload.min.js',
 	'/dist/idb.js',
 	'/dist/localforage.js',
 	'/dist/dbhelper.js',
@@ -11,16 +12,16 @@ const cacheFiles = [
 	'/dist/css/styles.min.css',
 	'/manifest.json',
 	'/favicon.png',
-	'/img/1.jpg',
-	'/img/2.jpg',
-	'/img/3.jpg',
-	'/img/4.jpg',
-	'/img/5.jpg',
-	'/img/6.jpg',
-	'/img/7.jpg',
-	'/img/8.jpg',
-	'/img/9.jpg',
-	'/img/10.jpg',
+	'/img/compressed/1.jpg',
+	'/img/compressed/2.jpg',
+	'/img/compressed/3.jpg',
+	'/img/compressed/4.jpg',
+	'/img/compressed/5.jpg',
+	'/img/compressed/6.jpg',
+	'/img/compressed/7.jpg',
+	'/img/compressed/8.jpg',
+	'/img/compressed/9.jpg',
+	'/img/compressed/10.jpg',
 	'/img/logo-128.png',
 	'/img/logo-144.png',
 	'/img/logo-152.png',
@@ -58,9 +59,12 @@ self.addEventListener('activate', function(event){
 
 // Fetch event
 self.addEventListener('fetch', function(event){
+
+	var url = new URL(event.request.url)
+	if (url.origin !== self.origin) return;
 	event.respondWith(
-		caches.match(event.request).then(function(response){
-			return response || fetch(event.request);
+		caches.match(url.pathname).then(function(response){
+			return response || fetch(url);
 		})
 	);
 });
