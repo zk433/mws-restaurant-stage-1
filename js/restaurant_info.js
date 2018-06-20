@@ -75,7 +75,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
   // fill reviews
-  fillReviewsHTML();
+  const id = getParameterByName('id');
+  DBHelper.getReviewsForRestaurant(id, fillReviewsHTML);
 }
 
 /**
@@ -101,7 +102,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+fillReviewsHTML = (reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
@@ -129,9 +130,9 @@ createReviewHTML = (review) => {
   name.innerHTML = review.name;
   li.appendChild(name);
 
-  const date = document.createElement('p');
-  date.innerHTML = review.date;
-  li.appendChild(date);
+  /*const date = document.createElement('p');
+  date.innerHTML = new Date(review.createdAt);
+  li.appendChild(date);*/
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
@@ -143,6 +144,33 @@ createReviewHTML = (review) => {
 
   return li;
 }
+
+/** 
+* Create new review and send it to the dbs
+*/
+addNewReview = () => {
+  // get form data
+  const form = document.querySelector('#new-review');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const restaurant_id = getParameterByName('id');
+    const name = document.querySelector('#name').value;
+    const rating = document.querySelector('#rating').value;
+    const comments = document.querySelector('#comments').value;
+
+    const review = {
+      restaurant_id,
+      name,
+      rating,
+      comments
+    }
+
+    // add data to the server
+    DBHelper.addNewReview(review);
+  })
+}
+
+addNewReview();
 
 /**
  * Add restaurant name to the breadcrumb navigation menu

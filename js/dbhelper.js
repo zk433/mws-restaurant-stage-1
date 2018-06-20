@@ -6,7 +6,7 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 1337 // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
+    return `http://localhost:${port}`;
   }
 
   /**
@@ -14,7 +14,7 @@ class DBHelper {
    */
 
   static fetchRestaurants(callback) {
-    fetch(DBHelper.DATABASE_URL).then(response => {
+    fetch(DBHelper.DATABASE_URL + '/restaurants').then(response => {
         return response.json();
     }).then(restaurants => {
       this.saveRestaurants(restaurants);
@@ -38,6 +38,28 @@ class DBHelper {
   static getRestaurants() {
     return localforage.getItem('restaurants')
   }
+
+  /**
+   * Create a new review
+   */
+  static addNewReview(review) {
+    console.log('This is coming from the dbhelper: ', review);
+    return fetch(DBHelper.DATABASE_URL + '/reviews/', {
+      method: 'POST',
+      body: JSON.stringify(review)
+    });
+  }
+
+  /**
+   * Fetch a review
+   */
+  static getReviewsForRestaurant(restaurantId, callback) {
+    return fetch(`${this.DATABASE_URL}/reviews/?restaurant_id=${restaurantId}`)
+      .then(data => data.json())
+      .then(reviews => callback(reviews))
+      .catch(error => callback(null))
+  };
+
 
   /**
    * Fetch a restaurant by its ID.

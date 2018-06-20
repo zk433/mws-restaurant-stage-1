@@ -59,7 +59,28 @@
         <ul id="reviews-list"></ul>
       </section>
       <!-- End reviews -->
+
+          <!-- Reviews form-->
+      <section id="new-review">
+        <h3 tabindex="0">Add New Review</h3>
+        <form id="review-form">  <!-- method="POST" action="http://localhost:1337/reviews/" -->
+          <input type="text" placeholder="Name" id="name" aria-label="Review Author Name">
+          <select name="rating" id="rating" aria-label="Rating">
+            <option class="review-option" value="none" disabled selected>Rating</option>
+            <option class="review-option" value="1">1</option>
+            <option class="review-option" value="2">2</option>
+            <option class="review-option" value="3">3</option>
+            <option class="review-option" value="4">4</option>
+            <option class="review-option" value="5">5</option>
+          </select>
+          <textarea name="comments" id="comments" cols="40" rows="10" placeholder="Please leave you feedback here..." aria-label="Review"></textarea>
+          <input class="new-review__submit" id="submit" type="submit">
+        </form>
+      </section>
+      <!-- end reviews form-->
     </div>
+
+
   </main>
   <!-- End main -->
 
@@ -86,7 +107,7 @@
 
   <script src="dist/idb.js"></script>
   <script src="dist/localforage.js"></script>
-  <script type="text/javascript" src="dist/dbhelper.js"></script>
+  <script type="text/javascript" src="js/dbhelper.js"></script>
   <script type="text/javascript" src="js/restaurant_info.js"></script> 
   <script async src="js/lazyload.min.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBy2n0JtTy1xKkv1iSmT8HVXjvjzQ0rw&libraries=places&callback=initMap"></script>

@@ -2,3 +2,4 @@ node_modules
 .vscode/
 js/indexedDB.js
 *.afdesign
+.eslintrc.js
