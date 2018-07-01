@@ -56,8 +56,8 @@ class DBHelper {
   static getReviewsForRestaurant(restaurantId, callback) {
     return fetch(`${this.DATABASE_URL}/reviews/?restaurant_id=${restaurantId}`)
       .then(data => data.json())
-      .then(reviews => callback(reviews))
-      .catch(error => callback(null))
+      .then(reviews => callback(null, reviews))
+      .catch(error => callback(error, null))
   };
 
 

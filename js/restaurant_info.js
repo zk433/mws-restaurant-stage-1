@@ -102,11 +102,24 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews) => {
+
+const appendReview = review => {
+  const container = document.getElementById('reviews-container');
+  const ul = document.getElementById('reviews-list');
+  ul.appendChild(createReviewHTML(review));
+  container.appendChild(ul);
+}
+
+const fillReviewsHTML = (error, reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
+
+  if (error) {
+    console.log(error);
+    return;
+  }
 
   if (!reviews) {
     const noReviews = document.createElement('p');
@@ -114,12 +127,11 @@ fillReviewsHTML = (reviews) => {
     container.appendChild(noReviews);
     return;
   }
-  const ul = document.getElementById('reviews-list');
-  reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
-  });
-  container.appendChild(ul);
-}
+
+  for (const review of reviews) {
+      appendReview(review);
+  }
+};
 
 /**
  * Create review HTML and add it to the webpage.
@@ -164,7 +176,7 @@ addNewReview = () => {
       rating,
       comments
     }
-
+    appendReview(review);
     // add data to the server
     DBHelper.addNewReview(review);
   })

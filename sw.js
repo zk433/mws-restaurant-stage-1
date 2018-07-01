@@ -1,4 +1,4 @@
-const cacheName = "restaurant-cache-v2";
+const cacheName = "restaurant-cache-v1";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
