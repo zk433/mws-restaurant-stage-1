@@ -1,4 +1,4 @@
-const cacheName = "restaurant-cache-v1";
+const cacheName = "restaurant-cache-v2";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
@@ -27,6 +27,8 @@ const cacheFiles = [
 	'/img/logo-152.png',
 	'/img/logo-192.png',
 	'/img/logo-512.png',
+	'/img/grey-star.png',
+	'/img/yellow-star.png',
 	'https://fonts.googleapis.com/css?family=Open+Sans:400,700'
 ]
 

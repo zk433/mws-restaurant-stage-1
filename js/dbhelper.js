@@ -60,6 +60,19 @@ class DBHelper {
       .catch(error => callback(error, null))
   };
 
+  /**
+   * Add and remove from favourites
+   */
+
+  static addToFavorites(restaurantId) {
+    const url = `${DBHelper.DATABASE_URL}/${restaurantId}/?is_favorite=true`;
+    fetch(url, { method: 'PUT' })
+  }
+
+  static removeFromFavorites(restaurantId) {
+    const url = `${DBHelper.DATABASE_URL}/${restaurantId}/?is_favorite=false`;
+    fetch(url, { method: 'PUT' })
+  }
 
   /**
    * Fetch a restaurant by its ID.

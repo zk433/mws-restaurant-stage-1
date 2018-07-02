@@ -59,6 +59,14 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
+  const isFavorite = restaurant.is_favorite ? JSON.parse(restaurant.is_favorite) : false;
+
+  const star = document.querySelector('#star-button');
+  const starIcon = document.querySelector('#star-icon');
+
+  starIcon.src = isFavorite ? './img/yellow-star.png' : './img/grey-star.png';
+  star.addEventListener('click', () => toggleFavorite(restaurant));
+
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
 
@@ -77,6 +85,29 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   // fill reviews
   const id = getParameterByName('id');
   DBHelper.getReviewsForRestaurant(id, fillReviewsHTML);
+}
+
+/**
+ * Toggling favourite restaurant
+ */
+
+const addToFavorites = restaurantId => {
+  restaurant.is_favorite = true;
+  DBHelper.addToFavorites(restaurantId);
+  const starIcon = document.querySelector('#star-icon');
+  starIcon.src = './img/yellow-star.png';
+}
+
+const removeFromFavorites = restaurantId => {
+  restaurant.is_favorite = false;
+  DBHelper.removeFromFavorites(restaurantId);
+  const starIcon = document.querySelector('#star-icon');
+  starIcon.src = './img/grey-star.png';
+}
+
+const toggleFavorite = (restaurant = self.restaurant) => {
+  const isFavorite = restaurant.is_favorite ? JSON.parse(restaurant.is_favorite) : false;
+  isFavorite ? removeFromFavorites(restaurant.id) : addToFavorites(restaurant.id);
 }
 
 /**
