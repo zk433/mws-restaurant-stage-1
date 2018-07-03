@@ -61,8 +61,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const isFavorite = restaurant.is_favorite ? JSON.parse(restaurant.is_favorite) : false;
 
-  const star = document.querySelector('#star-button');
-  const starIcon = document.querySelector('#star-icon');
+  const star = document.querySelector('#fav-button');
+  const starIcon = document.querySelector('#fav-icon');
 
   starIcon.src = isFavorite ? './img/yellow-star.png' : './img/grey-star.png';
   star.addEventListener('click', () => toggleFavorite(restaurant));
@@ -92,16 +92,18 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 
 const addToFavorites = restaurantId => {
+  restaurant = self.restaurant;
   restaurant.is_favorite = true;
   DBHelper.addToFavorites(restaurantId);
-  const starIcon = document.querySelector('#star-icon');
+  const starIcon = document.querySelector('#fav-icon');
   starIcon.src = './img/yellow-star.png';
 }
 
 const removeFromFavorites = restaurantId => {
+  restaurant = self.restaurant;
   restaurant.is_favorite = false;
   DBHelper.removeFromFavorites(restaurantId);
-  const starIcon = document.querySelector('#star-icon');
+  const starIcon = document.querySelector('#fav-icon');
   starIcon.src = './img/grey-star.png';
 }
 
@@ -210,6 +212,7 @@ addNewReview = () => {
     appendReview(review);
     // add data to the server
     DBHelper.addNewReview(review);
+    DBHelper.saveSingleReviewForRestaurant(review);
   })
 }
 

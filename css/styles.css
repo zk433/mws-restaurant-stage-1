@@ -264,7 +264,7 @@ nav h1 a {
   display: inline-block;
 }
 
-#star-button, #star-icon {
+#fav-button, #fav-icon {
   background: none;
   border: none;
   width: 25px;
@@ -274,7 +274,7 @@ nav h1 a {
   margin-left: 10px;
 }
 
-#star-icon {
+#fav-icon {
   margin: 0;
 }
 

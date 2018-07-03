@@ -39,6 +39,8 @@ class DBHelper {
     return localforage.getItem('restaurants')
   }
 
+  /** REVIEWS!!! CREATING, FETCHING, SAVING LOCALLY */
+
   /**
    * Create a new review
    */
@@ -51,26 +53,64 @@ class DBHelper {
   }
 
   /**
-   * Fetch a review
+   * Fetch and Save reviews locally
    */
+
   static getReviewsForRestaurant(restaurantId, callback) {
+    this.getReviewsForRestaurantLocally(restaurantId)
+    .then(response => {
+      if (response) {
+        DBHelper.getReviewsForRestaurantRemotely(restaurantId)
+        return callback(null, response)
+      }
+      return DBHelper.getReviewsForRestaurantRemotely(
+        restaurantId,
+        callback
+      )
+    })
+  }
+
+  static saveReviewsForRestaurant(restaurantId, reviews) {
+    return localforage.setItem(`reviewsForRestaurant${restaurantId}`, reviews);
+  }
+
+  static getReviewsForRestaurantLocally(restaurantId) {
+    return localforage.getItem(`reviewsForRestaurant${restaurantId}`);
+  }
+
+  static getReviewsForRestaurantRemotely(restaurantId, callback = () => null) {
     return fetch(`${this.DATABASE_URL}/reviews/?restaurant_id=${restaurantId}`)
       .then(data => data.json())
-      .then(reviews => callback(null, reviews))
+      .then(reviews => {
+        this.saveReviewsForRestaurant(restaurantId, reviews)
+        callback(null, reviews)
+      })
       .catch(error => callback(error, null))
-  };
+  }
+
+  static saveSingleReviewForRestaurant(review) {
+    this.getReviewsForRestaurantLocally(review.restaurant_id)
+    .then(reviews => {
+      localforage.setItem(
+        `reviewsForRestaurant${review.restaurant_id}`,
+        [...reviews, { ...review, updatedAt: new Date() }]
+      )
+    })
+  }
+  
+  /** *************** END REVIEWS BUSINESS ****************** */
 
   /**
    * Add and remove from favourites
-   */
+   */ 
 
   static addToFavorites(restaurantId) {
-    const url = `${DBHelper.DATABASE_URL}/${restaurantId}/?is_favorite=true`;
+    const url = `${DBHelper.DATABASE_URL}/restaurants/${restaurantId}/?is_favorite=true`;
     fetch(url, { method: 'PUT' })
   }
 
   static removeFromFavorites(restaurantId) {
-    const url = `${DBHelper.DATABASE_URL}/${restaurantId}/?is_favorite=false`;
+    const url = `${DBHelper.DATABASE_URL}/restaurants/${restaurantId}/?is_favorite=false`;
     fetch(url, { method: 'PUT' })
   }
 
