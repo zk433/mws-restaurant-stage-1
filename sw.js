@@ -1,4 +1,4 @@
-const cacheName = "restaurant-cache-v1";
+const cacheName = "restaurant-cache-v2";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
@@ -73,10 +73,29 @@ self.addEventListener('fetch', function(event){
 		);
 	}
 	
-	event.respondWith(
-		caches.match(url.pathname).then(function(response){
-			return response || fetch(url);
-		})
-	);
-	return;
+	else {
+		event.respondWith(
+			caches.match(url.pathname).then(function(response){
+				return response || fetch(url);
+			})
+		);
+	}	
 });
+
+// Background sync
+self.addEventListener('sync', function(event) {
+	if (event.tag === 'sync-reviews') {
+		console.log('syncing reviews');
+		event.waitUntil(
+			syncing({ action: 'send-reviews'})
+		)
+	}
+});
+
+function syncing(message){
+	return clients.matchAll().then(clients => {
+		for (const client of clients) {
+			client.postMessage(message);
+		}
+	})
+}

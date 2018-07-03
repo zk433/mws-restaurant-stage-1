@@ -97,6 +97,55 @@ class DBHelper {
       )
     })
   }
+
+  // Syncing reviews
+
+  static submitOrSyncReview(review) {
+    this.submitRestaurantReview(review)
+    .catch(() => this.sendReviewSyncRequest(review))
+  }
+  
+
+  static submitRestaurantReview(review) {
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(review)
+    }
+    return fetch(`this.${DBHelper.DATABASE_URL}/reviews`, options)
+  }
+  
+
+  static sendReviewSyncRequest(review) {
+    if (navigator.serviceWorker) {
+      console.log('REQUESTING REVIEW SYNC')
+      this.storeReview(review)
+      navigator.serviceWorker.ready
+      .then(reg => reg.sync.register('sync-reviews'))
+    }
+  }
+
+  static storeReview(review) {
+    console.log('STORING REVIEW')
+    localforage.getItem('reviewsToSend')
+    .then(response => {
+      const reviews = response || [];
+      localforage.setItem('reviewsToSend', [...reviews, review])
+    });
+  }
+
+  static sendStoredReviews() {
+    console.log('SENDING REVIEWS')
+    localforage.getItem('reviewsToSend')
+    .then(response => {
+      const reviews = response || []
+      console.log('REVIEWS: ', reviews)
+      for (const review of reviews) {
+        this.submitRestaurantReview(review)
+      }
+      localforage.setItem('reviewsToSend', [])
+    })
+  }
+
   
   /** *************** END REVIEWS BUSINESS ****************** */
 
