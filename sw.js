@@ -1,4 +1,4 @@
-const cacheName = "restaurant-cache-v2";
+const cacheName = "restaurant-cache-v1";
 const cacheFiles = [
 	'/',
 	'/restaurant.html',
@@ -47,21 +47,33 @@ self.addEventListener('install', function(event){
 // Activate event
 self.addEventListener('activate', function(event){
 	console.log("SW activated");
-	event.waitUntil(
-		caches.keys().then(function(cacheNames){
-			return Promise.all(cacheNames.map(function(thisCacheName){
-				if(thisCacheName !== cacheName) {
-					console.log("SW Removing cached files from", thisCacheName);
-					return caches.delete(thisCacheName);
-				}
-			}))
-		})
-	)
+	return self.clients.claim();
+	// event.waitUntil(
+	// 	caches.keys().then(function(cacheNames){
+	// 		return Promise.all(cacheNames.map(function(thisCacheName){
+	// 			if(thisCacheName !== cacheName) {
+	// 				console.log("SW Removing cached files from", thisCacheName);
+	// 				return caches.delete(thisCacheName);
+	// 			}
+	// 		}))
+	// 	})
+	// )
+});
+
+// Background sync
+self.addEventListener('sync', function(event) {
+	console.log('sync listener')
+	if (event.tag === 'sync-reviews') {
+		console.log('syncing reviews');
+		event.waitUntil(
+			doSync({ action: 'send-reviews'})
+		)
+	}
 });
 
 // Fetch event
 self.addEventListener('fetch', function(event){
-
+	console.log('fetch listener')
 	const url = new URL(event.request.url)
 
 	if (url.origin !== self.origin) return;
@@ -72,7 +84,6 @@ self.addEventListener('fetch', function(event){
 				.then(response => response || fetch(url))
 		);
 	}
-	
 	else {
 		event.respondWith(
 			caches.match(url.pathname).then(function(response){
@@ -82,19 +93,12 @@ self.addEventListener('fetch', function(event){
 	}	
 });
 
-// Background sync
-self.addEventListener('sync', function(event) {
-	if (event.tag === 'sync-reviews') {
-		console.log('syncing reviews');
-		event.waitUntil(
-			syncing({ action: 'send-reviews'})
-		)
-	}
-});
-
-function syncing(message){
-	return clients.matchAll().then(clients => {
+function doSync(message){
+	console.log('DoSync')
+	return clients.matchAll().then(clients => {DoSync
+		console.log('clients matched')
 		for (const client of clients) {
+			console.log('posting message')
 			client.postMessage(message);
 		}
 	})

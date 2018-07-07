@@ -94,12 +94,19 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
+  <script src="dist/idb.js"></script>
+  <script src="dist/localforage.js"></script>
+  <script type="text/javascript" src="js/dbhelper.js"></script>
+  <script type="text/javascript" src="js/restaurant_info.js"></script> 
   <script>
     if ('serviceWorker' in navigator){
-    navigator.serviceWorker
-    .register('sw.js')
-    .then(function(registration){
+    navigator.serviceWorker.register('sw.js')
+    .then((function(registration)){
       console.log("SW registration completed");
+      navigator.serviceWorker.addEventListener('message', message => {
+        message.data.action === 'send-reviews' &&
+          DBHelper.sendStoredReviews()
+      })
     }).catch(function(err){
       console.log("SW registration failed", err);
     });
@@ -107,11 +114,6 @@
       console.log("SW is not supported in this browser");
     };
   </script>
-
-  <script src="dist/idb.js"></script>
-  <script src="dist/localforage.js"></script>
-  <script type="text/javascript" src="js/dbhelper.js"></script>
-  <script type="text/javascript" src="js/restaurant_info.js"></script> 
   <script async src="js/lazyload.min.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBy2n0JtTy1xKkv1iSmT8HVXjvjzQ0rw&libraries=places&callback=initMap"></script>
 

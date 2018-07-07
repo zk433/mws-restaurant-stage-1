@@ -211,7 +211,8 @@ addNewReview = () => {
     }
     appendReview(review);
     // add data to the server
-    DBHelper.addNewReview(review);
+    // DBHelper.addNewReview(review);
+    DBHelper.submitOrSyncReview(review);
     DBHelper.saveSingleReviewForRestaurant(review);
   })
 }
