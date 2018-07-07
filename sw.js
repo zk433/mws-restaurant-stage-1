@@ -40,6 +40,8 @@ self.addEventListener('install', function(event){
 		.then(function(cache){
 			console.log("SW caching cachefiles");
 			return cache.addAll(cacheFiles);
+		}).then(function() {
+			return self.skipWaiting();
 		})
 	)
 });
@@ -95,7 +97,7 @@ self.addEventListener('fetch', function(event){
 
 function doSync(message){
 	console.log('DoSync')
-	return clients.matchAll().then(clients => {DoSync
+	return clients.matchAll().then(clients => {
 		console.log('clients matched')
 		for (const client of clients) {
 			console.log('posting message')
