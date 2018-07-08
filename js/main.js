@@ -142,7 +142,6 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
-  var myLazyLoad = new LazyLoad();
 }
 
 /**
@@ -159,6 +158,7 @@ createRestaurantHTML = (restaurant) => {
   image.className = 'restaurant-img';
   image.alt = `Image of the ${restaurant.name} restaurant`;
   image.setAttribute('data-src', DBHelper.imageUrlForRestaurant(restaurant));
+  intersectionObserver.observe(image);
   wrapper.append(image);
 
   const name = document.createElement('h2');
@@ -184,7 +184,7 @@ createRestaurantHTML = (restaurant) => {
 /**
  * Add markers for current restaurants to the map.
  */
-addMarkersToMap = (restaurants = self.restaurants) => {
+const addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
@@ -194,3 +194,15 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 }
+
+/**
+ * Add Intersection Observer
+ */
+
+const intersectionObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) return;
+    entry.target.src = entry.target.dataset.src
+    intersectionObserver.unobserve(entry.target)
+  }
+});

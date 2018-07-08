@@ -4,12 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link async rel="preload stylesheet" as="style" href="css/normalize.min.css">
   <link async rel="preload stylesheet" as="style" href="dist/css/styles.min.css">
-  <link async defer href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link rel="preload" href="js/dbhelper.js" as="script">
+
   <title>Restaurant Reviews</title>
+
   <link rel="shortcut icon" href="/favicon.png" type="image/png" />
   <link rel="manifest" href="/manifest.json">
+
   <meta name="theme-color" content="#2196F3">
   <meta name="Description" content="Restaurant Review App">
   <meta name="keywords" content="Restaurant, Cuisine, Food, Review">
@@ -48,10 +52,12 @@
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
 
-  <script src="dist/idb.js"></script>
-  <script src="dist/localforage.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.2/localforage.min.js"></script>
+
+  <script async src="dist/idb.js"></script>
+  <!-- <script src="dist/localforage.js"></script> -->
+  <script async type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
+  <script async type="application/javascript" charset="utf-8" src="js/main.js"></script>
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -68,8 +74,7 @@
         })
     }
   </script>
-  
-  <script async src="js/lazyload.min.js"></script>
+
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBy2n0JtTy1xKkv1iSmT8HVXjvjzQ0rw&libraries=places&callback=initMap"></script>
 
 </body>

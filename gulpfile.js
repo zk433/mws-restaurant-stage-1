@@ -25,12 +25,6 @@ gulp.task('js',  function(){
     .pipe(gulp.dest('dist'))
 });
 
-gulp.task('gzip', function(){
-    return gulp.src('css/*.css')
-    .pipe(gzip())
-    .pipe(gulp.dest('gzipped'))
-})
-
 gulp.task('css', function(){
     return gulp.src('css/styles.css')
     .pipe(sourcemaps.init())
@@ -38,6 +32,12 @@ gulp.task('css', function(){
     .pipe(rename('styles.min.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/css'));
+})
+
+gulp.task('gzip', function() {
+    return gulp.src('./js/*.js')
+	.pipe(gzip())
+	.pipe(gulp.dest('./dist/scripts'));
 })
 
 gulp.task('watch', function(){

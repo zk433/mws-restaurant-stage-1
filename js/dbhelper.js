@@ -276,10 +276,15 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
+    // if(restaurant.id == '10'){
+    //   return (`/img/compressed/${restaurant.photograph = '10'}.jpg`);
+    // } else {
+    //   return (`/img/compressed/${restaurant.photograph}.jpg`);
+    // }
     if(restaurant.id == '10'){
-      return (`/img/compressed/${restaurant.photograph = '10'}.jpg`);
+      return (`/img/webp/${restaurant.photograph = '10'}.webp`);
     } else {
-      return (`/img/compressed/${restaurant.photograph}.jpg`);
+      return (`/img/webp/${restaurant.photograph}.webp`);
     }
   }
 

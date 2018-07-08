@@ -2,15 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <!-- Main CSS file -->
-  <link asyns rel="preload stylesheet" as="style" href="css/normalize.min.css" type="text/css">
-  <link asyns rel="preload stylesheet" as="style" href="dist/css/styles.min.css" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-  <title>Restaurant Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link async rel="preload stylesheet" as="style" href="css/normalize.min.css">
+  <link async rel="preload stylesheet" as="style" href="dist/css/styles.min.css">
+  <link rel="preload" href="js/dbhelper.js" as="script">
+
+  <title>Restaurant Reviews</title>
+
   <link rel="shortcut icon" href="/favicon.png" type="image/png" />
   <link rel="manifest" href="/manifest.json">
+
   <meta name="theme-color" content="#2196F3">
   <meta name="Description" content="Restaurant Review App">
   <meta name="keywords" content="Restaurant, Cuisine, Food, Review">
@@ -94,10 +97,12 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
-  <script src="dist/idb.js"></script>
-  <script src="dist/localforage.js"></script>
-  <script type="text/javascript" src="js/dbhelper.js"></script>
-  <script type="text/javascript" src="js/restaurant_info.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.2/localforage.min.js"></script>
+  <script async src="dist/idb.js"></script>
+  <!-- <script src="dist/localforage.js"></script> -->
+  <script async type="text/javascript" src="js/dbhelper.js"></script>
+  <script async type="text/javascript" src="js/restaurant_info.js"></script> 
+
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
@@ -113,7 +118,7 @@
         })
     }
   </script>
-  <script async src="js/lazyload.min.js"></script>
+
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBy2n0JtTy1xKkv1iSmT8HVXjvjzQ0rw&libraries=places&callback=initMap"></script>
 
 </body>

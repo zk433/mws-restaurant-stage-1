@@ -4,32 +4,30 @@ const cacheFiles = [
 	'/restaurant.html',
 	'/js/main.js',
 	'/js/restaurant_info.js',
-	'/js/lazyload.min.js',
 	'/js/dbhelper.js',
 	'/dist/idb.js',
-	'/dist/localforage.js',
+	// '/dist/localforage.js',
 	'/css/normalize.min.css',
 	'/dist/css/styles.min.css',
 	'/manifest.json',
 	'/favicon.png',
-	'/img/compressed/1.jpg',
-	'/img/compressed/2.jpg',
-	'/img/compressed/3.jpg',
-	'/img/compressed/4.jpg',
-	'/img/compressed/5.jpg',
-	'/img/compressed/6.jpg',
-	'/img/compressed/7.jpg',
-	'/img/compressed/8.jpg',
-	'/img/compressed/9.jpg',
-	'/img/compressed/10.jpg',
+	'/img/webp/1.webp',
+	'/img/webp/2.webp',
+	'/img/webp/3.webp',
+	'/img/webp/4.webp',
+	'/img/webp/5.webp',
+	'/img/webp/6.webp',
+	'/img/webp/7.webp',
+	'/img/webp/8.webp',
+	'/img/webp/9.webp',
+	'/img/webp/10.webp',
 	'/img/logo-128.png',
 	'/img/logo-144.png',
 	'/img/logo-152.png',
 	'/img/logo-192.png',
 	'/img/logo-512.png',
 	'/img/grey-star.png',
-	'/img/yellow-star.png',
-	'https://fonts.googleapis.com/css?family=Open+Sans:400,700'
+	'/img/yellow-star.png'
 ]
 
 // *Install event 
@@ -75,8 +73,8 @@ self.addEventListener('sync', function(event) {
 
 // Fetch event
 self.addEventListener('fetch', function(event){
-	console.log('fetch listener')
-	const url = new URL(event.request.url)
+	console.log('fetch listener');
+	const url = new URL(event.request.url);
 
 	if (url.origin !== self.origin) return;
 
@@ -85,6 +83,7 @@ self.addEventListener('fetch', function(event){
 			caches.match('/')
 				.then(response => response || fetch(url))
 		);
+		return;
 	}
 	else {
 		event.respondWith(

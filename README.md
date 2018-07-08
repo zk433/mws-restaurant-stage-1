@@ -12,12 +12,13 @@ I was provided the code for a restaurant reviews website. The code had a lot of 
 
 ### Set Up
 
-1. Run a local server from the computer's terminal using a `live-server` npm package with the following setup:
-    ```live-server --port=8000 --host=localhost```
+1. Run a local server from the computer's terminal using a `npm start` command
 
-2. With the server running, the site can be viewed on `http://localhost:8000`
+2. Run this API server: https://github.com/udacity/mws-restaurant-stage-3
 
-3. All changes in the code are displayed automatically in the browser
+3. With the servers running, the site can be viewed on `http://localhost:8000`
+
+4. All changes in the code are displayed automatically in the browser
 
 ### Author
 - [Zuzana K](www.zuzana-k.com)
